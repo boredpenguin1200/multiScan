@@ -38,24 +38,50 @@ def moveToPos(ser, x, y, z):
                         # print(l)
                         to -= 1
 
+def setZeroCoords(sPort):
+    #set 0 coords
+    # s = b'G92\n'
+    # print(s)
+    # sPort.write(s)
+    print(sPort.readline())
 
-def homeAll(sPort):
-    s1 = b'G90\n'
-    sPort.write(s1)
-    print(sPort.readline())
-    s = b'G28\n'
-    print(s)
-    sPort.write(s)
-    print(sPort.readline())
-    while (sPort.readline()):
-        pass
-        # time.sleep(10)
+
+# def homeX(sPort):
+#
+#
+# # def homeAll(sPort):
+#     #set abs positioning
+#     s1 = b'G90\n'
+#     sPort.write(s1)
+#     print(sPort.readline())
+#     sPort.readline()
+#
+#     #home all
+#     s = b'G28\n'
+#     print(s)
+#     sPort.write(s)
+#     print(sPort.readline())
+#     sPort.readline()
+#     while (sPort.readline()):
+#         #let the machine move
+#         pass
+#
+#     #set 0 coords
+#     s = b'G92\n'
+#     print(s)
+#     sPort.write(s)
+#     print(sPort.readline())
+
 
 
 def setupSerial(serialLoc):
     ser = serial.Serial(serialLoc, 115200, timeout=1)
     # ser = serial.Serial('/dev/serial', 115200, timeout=1)
     # ser.write(initString.encode('ISO8859'))
+
+    #assume printer is in the lower left of the object to scan
+    setZeroCoords(ser)
     ser.readline()
-    homeAll(ser)
+
+    # homeAll(ser)
     return ser

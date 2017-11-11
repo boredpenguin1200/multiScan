@@ -1,14 +1,15 @@
 # import CapScan
 # import marlincodes
 # import sensorhead
-import SensorStream
-import marlincodes
+# import SensorStream
+# import marlincodes
 import CapScan
+CapScan.USE_OPENCV = 1
 import os
 
 # set as needed, may change
-printerSerialName = '/dev/ttyACM0'
-sensorSerialName = '/dev/ttyACM1'
+# printerSerialName = '/dev/ttyACM0'
+# sensorSerialName = '/dev/ttyACM1'
 
 # # iterate through results and show them
 # for f in os.listdir('results'):
@@ -30,10 +31,16 @@ sensorSerialName = '/dev/ttyACM1'
 #         cs.loadResults()
 #         cs.showResults()
 
-printerSer = marlincodes.setupSerial(printerSerialName)
-sensorSer = SensorStream.SensorStream(sensorSerialName)
-cs = CapScan.CapScan('xbox-test', sensorSer, printerSer)
-cs.doScan() #enable to do scan (must set USE_SERIAL)
+# printerSer = marlincodes.setupSerial(printerSerialName)
+# sensorSer = SensorStream.SensorStream(sensorSerialName)
+cs = CapScan.CapScan('xbox-test', '', '')
+# cs.doScan() #enable to do scan (must set USE_SERIAL)
+cs.loadResults()
+# cs.showResults(valueToShow="objectTemp", filter=False)
+cs.showResults(valueToShow="distance", filter=False, ignoreTop=0)
+# cs.showResults(valueToShow="capReading", filter=False, ignoreBottom=1000)
+# cs.showResults(valueToShow="internalTemp", filter=False)
+# cs.viewMultiChannel()
 
 # for a in range(100):
 #     sensorSer.processStream(averages=10)
